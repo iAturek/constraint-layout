@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">ConstraintLayout</string>
-    <string name="user_name">Imię:</string>
-    <string name="user_email">Email:</string>
-    <string name="user_number">Numer telefonu komórkowego:</string>
+    <string name="user_email">Email</string>
+    <string name="user_password">Hasło</string>
+    <string name="remember_me">Zapamiętaj mnie</string>
+    <string name="password_remind">Nie pamiętam hasła</string>
+    <string name="login">Zaloguj</string>
 </resources>
