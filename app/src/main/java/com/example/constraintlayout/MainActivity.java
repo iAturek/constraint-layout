@@ -36,9 +36,13 @@ public class MainActivity extends AppCompatActivity {
         Button btnCalculate = findViewById(R.id.btnCalculate);
         Button btnClear = findViewById(R.id.btnClear);
 
+        showPercent(sbPercent.getProgress());
+
         sbPercent.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {}
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                showPercent(progress);
+            }
 
                 @Override
                 public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -47,5 +51,32 @@ public class MainActivity extends AppCompatActivity {
                 public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
+    }
+    private void showPercent(int percent) {
+        tvPercentValue.setText(getString(R.string.percent_format, percent));
+    }
+    private void calculate() {
+        String text = etAmount.getText().toString().trim();
+
+        if (text.isEmpty()) {
+            Toast.makeText(this, R.string.error_empty_amount, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double amount = Double.parseDouble(text.replace(',', '.'));
+        double total = amount + amount * sbPercent.getProgress() / 100.0;
+
+        if (cbRound.isChecked()) {
+            total = Math.ceil(total);
+        }
+
+        tvResult.setText(getString(R.string.result_format, total));
+        groupResult.setVisibility(View.VISIBLE);
+    }
+    private void clear() {
+        etAmount.setText("");
+        sbPercent.setProgress(10);
+        cbRound.setChecked(false);
+        groupResult.setVisibility(View.GONE);
     }
 }
