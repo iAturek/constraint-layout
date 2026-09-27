@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">ConstraintLayout</string>
-    <string name="user_email">Email</string>
-    <string name="user_password">Hasło</string>
-    <string name="remember_me">Zapamiętaj mnie</string>
-    <string name="password_remind">Nie pamiętam hasła</string>
-    <string name="login">Zaloguj</string>
+    <string name="app_name">Napiwek</string>
+    <string name="screen_title">Kalkulator napiwku</string>
+    <string name="hint_amount">Kwota rachunku</string>
+    <string name="label_percent">Napiwek</string>
+    <string name="round_up">Zaokrąglij w górę</string>
+    <string name="btn_clear">Wyczyść</string>
+    <string name="btn_calculate">Policz</string>
+    <string name="label_result">Do zapłaty</string>
+    <string name="percent_format">%1$d%%</string>
+    <string name="result_format">%1$.2f zł</string>
+    <string name="error_empty_amount">Podaj kwotę rachunku</string>
 </resources>
