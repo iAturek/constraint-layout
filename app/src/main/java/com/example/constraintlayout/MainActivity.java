@@ -15,8 +15,11 @@ import androidx.constraintlayout.widget.Group;
 public class MainActivity extends AppCompatActivity {
 
     private EditText etAmount;
+
+    private  EditText etPersonAmount;
     private SeekBar sbPercent;
     private TextView tvPercentValue;
+    private TextView tvResultLabel;
     private TextView tvResult;
     private CheckBox cbRound;
     private Group groupResult;
@@ -27,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         etAmount = findViewById(R.id.etAmount);
+        etPersonAmount = findViewById(R.id.etPersonAmount);
         sbPercent = findViewById(R.id.sbPercent);
         tvPercentValue = findViewById(R.id.tvPercentValue);
+        tvResultLabel = findViewById(R.id.tvResultLabel);
         tvResult = findViewById(R.id.tvResult);
         cbRound = findViewById(R.id.cbRound);
         groupResult = findViewById(R.id.groupResult);
@@ -50,13 +55,15 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) { }
         });
-
+        btnCalculate.setOnClickListener(v -> calculate());
+        btnClear.setOnClickListener(v -> clear());
     }
     private void showPercent(int percent) {
         tvPercentValue.setText(getString(R.string.percent_format, percent));
     }
     private void calculate() {
         String text = etAmount.getText().toString().trim();
+        String personText = etPersonAmount.getText().toString().trim();
 
         if (text.isEmpty()) {
             Toast.makeText(this, R.string.error_empty_amount, Toast.LENGTH_SHORT).show();
@@ -64,12 +71,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         double amount = Double.parseDouble(text.replace(',', '.'));
-        double total = amount + amount * sbPercent.getProgress() / 100.0;
+        int person = Integer.parseInt(personText);
+        double total = (amount + amount * sbPercent.getProgress() / 100.0)/person;
 
         if (cbRound.isChecked()) {
             total = Math.ceil(total);
         }
 
+        tvResultLabel.setText(getString(R.string.label_result, person));
         tvResult.setText(getString(R.string.result_format, total));
         groupResult.setVisibility(View.VISIBLE);
     }
